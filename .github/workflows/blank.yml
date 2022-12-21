@@ -1,0 +1,26 @@
+console.log("ho fatto partire l'echo server");
+const WebSocket = require('ws');
+const PORT = 5000
+
+const wsServer = new WebSocket.Server({
+port: PORT
+});
+
+wsServer.on('connection',function(socket) {
+    //some feedback on the console
+console.log("a client just connected");
+
+
+//attach some behavior to the incoming socket
+   socket.on('message' , function (msg) {
+    console.log("received message from client: " + msg);
+    socket.send("take this back" + msg);
+   })
+
+});
+
+
+
+console.log("ho fatto partire echo server" + wsServer.options.port);
+console.log ((newDate()) + "Server is listening on port " + PORT);
+
